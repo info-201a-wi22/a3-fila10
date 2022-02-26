@@ -64,7 +64,6 @@ trend_over_time_king <- ggplot(data = trend_over_time_king, mapping = aes(x = ye
        colour = ""
   )
 
-incarcination_file <- read.csv("https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv",stringsAsFactors = FALSE)
 # kitsap county data
 kitsap_county_data <- incarcination_file %>%
   filter(county_name == "Kitsap County") %>%

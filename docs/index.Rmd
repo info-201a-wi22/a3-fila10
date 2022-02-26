@@ -128,6 +128,8 @@ pre_jail_king <- ave_jail_king
 source("../source/analysis.R")
 print(trend_over_time_king)
 ```
+
+
 This chart shows signficant trend. When anaylzing data until around 2010 you can make an argument that as the rate of black jail populations increased so did the rate of total jailed populations. This again comes back to highlight the disporpotianate relationship black minorities have with the population when it comes to incarcination, even sometimes before trial.
 
 
@@ -136,6 +138,8 @@ This chart shows signficant trend. When anaylzing data until around 2010 you can
 source("../source/analysis.R")
 print(variable_com_king2)
 ```
+
+
 This chart provides us with essential summary comparison, highlighting the proportions of population of races in jail from 3 diffrent races. The trend grasped from this is in both counties even though the black population is lower than the other 2 races the porportion of black americans in jail does not equate with their population in general. This providing us with yet another reason to question the state of our policing.
 
 
