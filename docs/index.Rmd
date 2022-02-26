@@ -1,28 +1,142 @@
 ---
-title: "index.rmd"
-output: html_document
----
+# Exploring the trends of jail populations in two Counties in  Washington State. King County and Kitsap County
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+## Introduction
+As i student who grew up in king county, the anaylzing of King County is a great oppurtunity to learn. i also wanted to compare some of its data with the neighbouring county that holds praise for its peace and close knit suburban livelihood Kitsap County. As the title suggests i focused on the **Jail populatons**. Primary zoomed to the races of Black, White, and Asian americans. 
+The data anaylsed for my report begins in **1985**.
+
+  Here are the variables taken in to consideraton for the entirety of this report:
+
+
+-  black_jail_pop
+-  white_jail_pop
+-  aapi_jail_pop
+-  total_jail_pretrial
+-  total_jail_dis
+-  total_jail_pop
+-  total_jail_adm
+-  black_pop_15to64
+-  white_pop_15to64
+-  aapi_pop_15to64
+
+
+Follow this link to read more on each variable https://github.com/vera-institute/incarceration_trends/blob/master/incarceration_trends-Codebook.pdf?raw=true.
+
+Now that you are fammiliar with the variables of interest let me introduce the goal of this report.
+
+- The main goal of this report is to compare and contrast the trends of jail populatations across the two counties of interest. Vital focus was placed on highlighting patterns of populations in jail of diffrent races(especially black) and comparing it to populations number of each race in the county as time persists as well as acknowledging other trends such us jail before trial and its significance with diffrent populations.
+
+### Summary information
+Lets initialize our focus and highlight the most recent population of our groups, first in **king** county then **Kitsap**.:
+```{r,echo = FALSE, message = FALSE}
+source("../source/kingcounty.R")
+black_pop_15to64 <- black_pop_king
+white_pop_15to64 <- white_pop_king
+asian_pop_15to64 <- asian_pop_king
 ```
 
-## R Markdown
+- As of 2018 King county is reported to have `r black_pop_15to64` individuals that are black americans. 
+- As of 2018 King county is reported to have `r white_pop_15to64` individualas that are white americans. 
+- As of 2018 king county is reported to have `r asian_pop_15to64` individual that are asian americans.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Currnent population in Kitsap county :
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r,echo = FALSE, message = FALSE}
+source("../source/kitsapcounty.R")
+black_pop_15to64k <- black_pop_kitsap
+white_pop_15to64k <- white_pop_kitsap
+asian_pop_15to64k <- asian_pop_kitsap
 ```
 
-## Including Plots
+- As of 2018 Kitsap county is reported to have `r black_pop_15to64k` individuals that are black americans. 
+- As of 2018 Kitsap county is reported to have `r white_pop_15to64k` individualas that are white americans. 
+- As of 2018 kitsap county is reported to have `r asian_pop_15to64k` individual that are asian americans.
 
-You can also embed plots, for example:
+Shifting focus to highlight percentage of black americans in each county, this is essential when comparing it to jail populatoins in later sections.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r,echo = FALSE, message = FALSE}
+source("../source/kingcounty.R")
+per_blk_king <- percentage_blk_king 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r,echo = FALSE, message = FALSE}
+source("../source/kitsapcounty.R")
+per_blk_kitsap <- percentage_blk_kitsap 
+```
+
+- **King** **County** : Currently(2018) the black population in king county sits at `r per_blk_king` percent.
+
+- **Kitsap** **County** : Currently(2018) the black population in Kitsap County sits at `r per_blk_kitsap` percent
+
+Its apparent the black population percentage wise are a minority in both counties when it comes to data aggregated from individuals that are aged between 15 and 64. will the same trend continue when looking at jail populations and how they vary in between race?
+
+Here are the three distinct races and the percentage they make of the jail population.
+
+```{r,echo = FALSE, message = FALSE}
+source("../source/kingcounty.R")
+jail_blk_per <- per_blkjail_king
+jail_wt_per <- per_wtjail_king
+jail_asian_per <- per_asianjail_king
+```
+
+
+- White americans make up `r jail_wt_per` percent of the jail population in king county as of 2018
+
+- Black americans make up `r jail_blk_per` percent of the jail population in king county as of 2018
+
+- Asian american make up `r jail_asian_per` percent of the jail population in king county as of 2018
+
+**Here** **are** **the** **data** **for** **jail** **population** **in** **Kitsap** **county:**
+
+```{r,echo = FALSE, message = FALSE}
+source("../source/kingcounty.R")
+jail_blk_per2 <- per_blkjail_kitsap
+jail_wt_per2 <- per_wtjail_kitsap
+jail_asian_per2 <- per_asianjail_kitsap
+```
+
+
+
+- White americans make up `r jail_wt_per2` percent of the jail population in kitsap county as of 2018
+
+- Black americans make up `r jail_blk_per2` percent of the jail population in kitsap county as of 2018
+
+- Asian americans make up `r jail_asian_per2` percent of the jail population in kitsap county as of 2018
+
+As you might have noticed the black population in both counties is fairly lower than its correspondent races of white and asian, but when the view is switched to anaylzze jail populations in both counties and their percentage.It is safe to say that there is a trend that the black populations make up a big percentage of the jail population even though not accounting it with their population size in the counties.
+
+With black jail populaton and general black population in mind, lets also highlight the significance of jail before trial. This is an important issue and its overlooked when assessing this data because it doesnt include race, even though the data itself isnt split by race you can get a good idea of proportian when comparing the total jail before trial with changes of race in the jail population over time.
+
+First lets get a sence of what are the averages of jail before trial in both King County and 
+Kitsap county. This will aid in seeing disparities when anaylzing our plots in the latter section
+```{r,echo = FALSE, message = FALSE}
+source("../source/analysis.R")
+pre_jail_kitsap <- ave_jail_kitsap 
+```
+```{r,echo = FALSE, message = FALSE}
+source("../source/analysis.R")
+pre_jail_king <- ave_jail_king 
+```
+
+
+
+- The average population of jail before trial in King County is `r pre_jail_king`
+- The average population of jail before trial in Kitsap County is `r pre_jail_kitsap`
+
+### Trend overtime chart
+```{r,echo = FALSE, message = FALSE}
+source("../source/analysis.R")
+print(trend_over_time_king)
+```
+This chart shows signficant trend. When anaylzing data until around 2010 you can make an argument that as the rate of black jail populations increased so did the rate of total jailed populations. This again comes back to highlight the disporpotianate relationship black minorities have with the population when it comes to incarcination, even sometimes before trial.
+
+
+### variable comparison chart
+```{r,echo = FALSE, message = FALSE}
+source("../source/analysis.R")
+print(variable_com_king2)
+```
+This chart provides us with essential summary comparison, highlighting the proportions of population of races in jail from 3 diffrent races. The trend grasped from this is in both counties even though the black population is lower than the other 2 races the porportion of black americans in jail does not equate with their population in general. This providing us with yet another reason to question the state of our policing.
+
+
+ 
