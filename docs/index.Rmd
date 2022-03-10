@@ -130,7 +130,7 @@ print(trend_over_time_king)
 ```
 
 
-This chart shows signficant trend. When anaylzing data until around 2010 you can make an argument that as the rate of black jail populations increased so did the rate of total jailed populations. This again comes back to highlight the disporpotianate relationship black minorities have with the population when it comes to incarcination, even sometimes before trial.
+This chart shows signficant trend. When anaylzing the graph you notice until around 2010 that as the rate of black jail populations increased so did the rate of total jailed pretrial jail populations. This highlights a very important fenominon that hints that more black people are taken into custody before going on trial. And us knowing that black people are the minority in the county, yet finding this resembles in the graph, should raise an alarm on the disporpotinate incarcination of black people in this country.
 
 
 ### variable comparison chart
@@ -141,6 +141,16 @@ print(variable_com_king2)
 
 
 This chart provides us with essential summary comparison, highlighting the proportions of population of races in jail from 3 diffrent races. The trend grasped from this is in both counties even though the black population is lower than the other 2 races the porportion of black americans in jail does not equate with their population in general. This providing us with yet another reason to question the state of our policing.
+
+### Map
+```{r,echo = FALSE, message = FALSE}
+source("../source/analysis.R")
+print(wash_map)
+```
+
+
+The map above provides us with an overview and scope of the entire Washington state and its counties. In the map you can notice a trend that highlights that depending on if the counties is urban, the more black jail population in those same counties. Main reason being historically black people have this negative connotation with rural areas(central/eastern washington), largely due to racism and prejudice that used to and still resides in those closed off areas .An example of this can be seen by looking at the far right county(spokane) compared to its neighboring counties has an increased number of black jail population. This can be due to the fact that spokane is urbanised and attracts interest from black people to reside there, disporpotinatly increasing the likelihood of black people getting arrested just because theres a slight increase in black peoples population in the county(spokane).
+
 
 
  

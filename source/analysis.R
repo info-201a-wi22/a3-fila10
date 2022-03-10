@@ -4,6 +4,9 @@ library(tidyr)
 library(ggplot2)
 # king county data
 incarcination_file <- read.csv("https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv",stringsAsFactors = FALSE)
+washington_state <- incarcination_file %>%
+  filter(state == "WA") %>%
+  filter(year == max(year))
 king_county_data <- incarcination_file %>%
   filter(county_name == "King County") %>%
   filter(state == "WA")
@@ -124,8 +127,71 @@ variable_com_king <- king_county_data %>%
                     add_row(county_name = "Kitsap County",black_jail_pop = 64.0,white_jail_pop = 353,aapi_jail_pop = 22) %>%
                     gather(key = Race, value = population, - county_name)
 
-variable_com_king2 <- ggplot(variable_com_king) +
-                     geom_col(mapping = aes(x = county_name, y = population, fill = Race)) + 
-                      labs (
-                      title= "The proportion of races in jail for King and Kitsap county (2018)"
-                      )
+#variable_com_king2 <- ggplot(variable_com_king) +
+#                     geom_col(mapping = aes(x = county_name, y = population, fill = Race)) + 
+#                      labs (
+#                      title= "The proportion of races in jail for King and Kitsap county (2018)"
+#                      )
+
+variable_com_king2 <- ggplot(variable_com_king, aes(x = county_name, y = population, fill = Race)) +
+  geom_col() +
+  geom_text(aes(label = population),
+  position = position_stack(vjust = 0.5)) + 
+  coord_polar(theta = "y") +
+  labs (
+    title= "The population of races in jail for King and Kitsap county (2018)"
+        )
+county_data <- map_data("county")
+county_data <- county_data %>%
+                filter(region == "washington")
+ggplot(county_data) + 
+  geom_polygon(
+    mapping = aes(x = long, y = lat, group = group),
+    color = "white",
+    size = .1
+  ) +
+  coord_map()
+washington_state <- washington_state %>%
+                    mutate(subregion = tolower(county_name))
+washington_state <- washington_state %>%
+                    select(subregion,black_jail_pop)
+county_data$subregion <- paste0(county_data$subregion, " county")
+county_data <- county_data %>%
+               left_join(washington_state, by = "subregion")
+
+black_theme <- theme_bw() +
+  theme(
+    axis.line = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    plot.background = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank()
+  )
+
+
+wash_map <-  ggplot(county_data) +
+  geom_polygon(
+    mapping = aes(x = long, y = lat, group = group, fill = black_jail_pop),
+    color = "white",
+    size = .1
+  ) +
+ coord_map() +
+   labs (fill = "Black Jail Population",
+         title = "Black Jail Population Across Washington Counties(2018)") +
+   black_theme
+ 
+ blank_theme <- theme_bw() +
+   theme(
+     axis.line = element_blank(),
+     axis.text = element_blank(),
+     axis.ticks = element_blank(),
+     axis.title = element_blank(),
+     plot.background = element_blank(),
+     panel.grid.major = element_blank(),
+     panel.grid.minor = element_blank(),
+     panel.border = element_blank()
+   )
+   
